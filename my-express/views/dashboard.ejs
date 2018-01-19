@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	
+	<title></title>
+	 <link rel='stylesheet' href='/stylesheets/list.css'/>
+	 
+</head>
+<body>
+	<h1>商品管理后台</h1>
+	<div class="left">
+		<ul class="left1">
+			<h3>导航菜单</h3>
+			<li>
+				商品管理
+			</li>
+			<ul class="left2" id="list" style="display: none">
+					<li>商品列表</li>
+					<li>添加新商品</li>
+					<li>商品分类</li>
+					<li>用户评论</li>
+				</ul>
+			<li>
+				促销管理
+			</li>
+			<ul class="left2" style="display: none">
+					<li>夺宝奇兵</li>
+					<li>红包类型</li>
+					<li>商品包装</li>
+					<li>祝福贺卡</li>
+				</ul>
+		</ul>
+	</div>
+	<div class="right2 right" style="display: none">
+		<h2>产品管理中心——添加新商品</h2>
+		<div class="tab-div">
+			<ul class="tabber">
+				<li><a href="#">通用信息</a></li>
+				<li><a href="#">详细描述</a></li>
+				<li><a href="#">其他信息</a></li>
+				<li><a href="#">商品属性</a></li>
+				<li><a href="#">商品相册</a></li>
+				<li><a href="#">关联商品</a></li>
+				<li><a href="#">配件</a></li>
+				<li><a href="#">关联文章</a></li>
+			</ul>
+			<div class="nav">
+				<ul class="nav1 navs">
+					<li><i>商品名称：</i><input type="text" id="goods_name"> <span>*</span></li>
+					<li><i>商品货号：</i><input type="text" id="goods_num"><p>如果您不输入商品货号，系统将自动生成一个唯一的货号。</p></li>
+					<li><i>商品分类：</i>
+						<select name="cat_id" id="cat_id">
+							<option value="0"></option>
+							<option value="132">钻石</option>
+							<option value="154">衣服</option>
+						</select>
+						<span>*</span></li>
+					<li><i>扩展分类：</i><input type="button" value="添加"></li>
+					<li><i>商品品牌：</i>
+						<select name="cat_id" onchange="hideCatDiv()">
+							<option value="0">请选择...</option>
+							<option value="44">kk</option>
+							<option value="154">衣服</option>
+							<option value="31">EVENY</option>
+							<option value="30">圣迪奥</option>
+							<option value="29">韩都衣舍</option>
+						</select>
+					</li>
+					<li><i>本店售价：</i><input type="text" id="price"> <span>*</span></li>
+					<li><i>会员价格：</i><input type="text" ><p>会员价格为-1时表示会员价格按会员等级折扣率计算。你也可以为每个等级指定一个固定价格</p></li>
+					<li><i>市场售价：</i><input type="text"><input type="button" value="取整数"></li>
+					<li><i>虚拟销量：</i><input type="text" id="virtual"></li>
+					<li><i>赠送消费积分数：</i><input type="text"><p>购买该商品时赠送消费积分数,-1表示按商品价格赠送</p></li>
+					<li><i>赠送等级积分数：</i><input type="text"><p>购买该商品时赠送消费积分数,-1表示按商品价格赠送</p></li>
+					<li><i>积分购买金额：</i><input type="text"><p>购买该商品时赠送消费积分数,-1表示按商品价格赠送</p></li>
+					<li><i>促销价：</i><input type="text"></li>
+					<li><i>上传商品图片：</i><input type="file" id="img" /><br><input type="text" class="upimgs"></li>
+					<li><i>上传商品缩略图：</i><input type="button" value="选择文件"><br><input type="text" class="upimgs"></li>
+					<li><input type="button" value="确定" class="ensure" onclick="btn()"><input type="button" value="重置" class="resect" onclick="resect()"></li>
+				</ul>
+				<div class="nav2 navs" style="display: none">
+					<textarea name="" id="text" cols="120" rows="10"></textarea>
+					<div>
+					   <input type="button" value="确定" class="ensure" onclick="btn()"><input type="button" value="重置" class="resect" onclick="resect()">
+					</div>	
+				</div>
+				<ul class="nav3 navs" style="display: none">
+						<li><i>商品重量：</i><input type="text"><select name="weight_unit"><option value="1" selected="">千克</option><option value="0.001">克</option></select></li>
+						<li><i>商品库存数量：</i><input type="text" id="inventory"><p>库存在商品为虚货或商品存在货品时为不可编辑状态，库存数值取决于其虚货数量或货品数量</p></li>
+						<li><i>库存警告数量：</i><input type="text"></li>
+						<li><i>加入推荐：</i><input type="checkbox" id="is_best" value="1"><span>精品</span><input type="checkbox" id="is_new" value="1"><span>新品 </span><input type="checkbox" id="is_hot" value="1"><span>热销</span></li>
+						<li><i>上架：</i><input type="checkbox" name="is_on_sale" value="1" checked="checked"><span> 打勾表示允许销售，否则不允许销售。</span></li>
+						<li><i>是否为免运费产品：</i><input type="checkbox" name="is_shipping" value="1"> 
+							<span>打勾表示此商品不会产生运费花销，否则按照正常运费计算。</span></li>
+						<li><i>商家关键词：</i><input type="text"><span>用空格分开</span></li>
+						<li><i>商品简单描述：</i><textarea name="goods_brief" cols="40" rows="3"></textarea></li>
+						<li><i>商备述家：</i><textarea name="seller_note" cols="40" rows="3"></textarea><p>仅供商家自己看的信息</p></li>
+						<li><input type="button" value="确定" class="ensure" onclick="btn()"><input type="button" value="重置" class="resect" onclick="resect()"></li>
+					</ul>
+					<ul class="nav4 navs" style="display: none">
+						<li><i>商品类型：</i>
+							<select name="goods_type" onchange="getAttrList(0)">
+			                  <option value="0">请选择商品类型</option>
+			                  <option value="1">书</option><option value="2">音乐</option><option value="3">电影</option><option value="4">手机</option><option value="5">笔记本电脑</option><option value="6">数码相机</option><option value="7">数码摄像机</option><option value="8">化妆品</option><option value="9">精品手机</option><option value="14">服装</option><option value="12">液晶电视</option><option value="15">美妆</option><option value="16">书</option><option value="17">音乐</option><option value="18">电影</option><option value="19">手机</option><option value="20">笔记本电脑</option><option value="21">数码相机</option><option value="22">数码摄像机</option><option value="23">化妆品</option><option value="24">精品手机</option></select>
+			                  <p>请选择商品的所属类型，进而完善此商品的属性</p>
+						</li>
+						<li><input type="button" value="确定" class="ensure"><input type="button" value="重置" class="resect"></li>
+					</ul>
+					<div class="nav5 navs" style="display: none">
+						<div>
+			              <a href="javascript:;" onclick="addImg(this)">[+]</a>
+			              图片描述 <input type="text" name="img_desc[]" size="20">
+			              上传文件 <input type="file" name="img_url[]">
+			              <input type="text" size="40" value="或者输入外部图片链接地址" style="color:#aaa;" onfocus="if (this.value == '或者输入外部图片链接地址'){this.value='http://';this.style.color='#000';}" name="img_file[]">
+                        </div>
+                        <div>
+						   <input type="button" value="确定" class="ensure"><input type="button" value="重置" class="resect">
+					    </div>	
+					</div>
+			</div>
+		</div>
+	</div>
+	<div class="right1 right">
+		<h2>产品管理中心——商品列表</h2>
+		<div class="search">
+			<img src="/images/icon_search.gif" alt="">
+			<span>关键字</span>
+			<input type="text" id="keyword">
+			<input type="button" value="搜索" id="btn">
+		</div>
+		<table cellpadding="3" cellspacing="1">
+		    <tbody id="tbodys">
+				<tr>
+				    <th>
+				      <input type="checkbox">
+				      <a href="javascript:listTable.sort('goods_id');">编号</a><img src="images/sort_desc.gif"></th>
+				    <th><a href="javascript:listTable.sort('goods_name');">商品名称</a></th>
+				    <th><a href="#">货号</a></th>
+				    <th><a href="#">价格</a></th>
+				    <th><a href="#">上架</a></th>
+				    <th><a href="#">精品</a></th>
+				    <th><a href="#">新品</a></th>
+				    <th><a href="#">热销</a></th>
+				    <th><a href="#">推荐排序</a></th>
+				    <th><a href="#">库存</a></th>
+				    <th><a href="#">虚拟销量</a></th>
+				    <th>操作</th>
+			    </tr>
+			    <!-- <tr style="height: 50px;line-height: 50px;text-align: center;">
+				    <td style="background-color: rgb(255, 255, 255);"><input type="checkbox" name="checkboxes[]" value="143">143</td>
+				    <td><span>暖怀－白18K金钻石戒指</span></td>
+				    <td align="center" style="background-color: rgb(255, 255, 255);"><span  title="点击修改内容" style="">ECS000143</span></td>
+				    <td align="center" style="background-color: rgb(255, 255, 255);"><span  title="点击修改内容" style="">0.00</span></td>
+				    <td align="center" style="background-color: rgb(255, 255, 255);"><img src="images/yes.gif"></td>
+				    <td align="center" style="background-color: rgb(255, 255, 255);"><img src="images/yes.gif" ></td>
+				    <td align="center" style="background-color: rgb(255, 255, 255);"><img src="images/yes.gif" ></td>
+				    <td align="center" style="background-color: rgb(255, 255, 255);"><img src="images/yes.gif" ></td>
+				    <td align="center" style="background-color: rgb(255, 255, 255);"><span >104</span></td>
+				        <td align="center" style="background-color: rgb(255, 255, 255);"><span >1</span></td>
+				        <td align="center" style="background-color: rgb(255, 255, 255);"><span >0</span></td>
+				    <td align="center" style="background-color: rgb(255, 255, 255);">
+				      <a href= title="编辑"><img src="images/icon_edit.gif" width="21" height="21" border="0"></a>
+				      <a href="javascript:;" title="回收站"><img src="images/icon_trash.gif" width="21" height="21" border="0"></a>
+				             </td>
+				</tr> -->
+		    </tbody>
+        </table>
+        <div id="turn-page">
+	        总计  <span id="totalRecords"></span>
+	        个记录分为 <span id="totalPages">1</span>
+	        页当前第 <span id="pageCurrent">1</span>
+	        页，每页 <input type="text" size="3" id="pageSize" value="5">
+	        <span id="page-link">
+	          <a href="javascript:;" id="onepage">第一页</a>
+	          <a href="javascript:;" id="minpage">上一页</a>
+	          <a href="javascript:;" id="addpage">下一页</a>
+	          <a href="javascript:;">最末页</a>
+	          <select id="gotoPage">
+	            <option value="1">1</option>          
+	          </select>
+        </span>
+      </div>
+      <div style="height: 30px">
+      	
+      </div>
+	</div>
+</body>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/list.js"></script>
+</html>
